@@ -1,0 +1,15 @@
+<studen teacher = "Ms. Clark" >
+	<firstName>Aly</fistName>
+	<lastName>Hassan</lastName>
+	<number>s19999999</number>
+</student>
+<studen teacher = "Ms. Clark" >
+	<firstName>Ian</fistName>
+	<lastName>Dewan</lastName>
+	<number>s18888888</number>
+</student>
+<studen teacher = "Ms. Clark" >
+	<firstName>Hao</fistName>
+	<lastName>Wei</lastName>
+	<number>s17777777</number>
+</student>

@@ -54,7 +54,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		//read something
 		classes.add("Select A Class");
-		classes.add("Mr. AlyBLAHBLAH's Period 3  |  ALY4U-02");
+		classes.add("Mr. ALYALYALY Period 3  |  ALY4U-02");
 		
 		//read something
 		students.add("ALY");
@@ -134,15 +134,16 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		leftLayout.putConstraint(SpringLayout.NORTH, classesBox, 10, 
 				SpringLayout.SOUTH, coursesBox);
+		leftLayout.putConstraint(SpringLayout.EAST, classesBox, -20, 
+				SpringLayout.EAST, leftPanel);
 		leftLayout.putConstraint(SpringLayout.WEST, classesBox, 20, 
 				SpringLayout.WEST, leftPanel);
+		
 		leftLayout.putConstraint(SpringLayout.NORTH, list, 20, 
 				SpringLayout.SOUTH, classesBox);
 		leftLayout.putConstraint(SpringLayout.NORTH, listPane, 20, 
 				SpringLayout.SOUTH, classesBox);
-		
-		
-		
+				
 		JPanel rightPanel = new JPanel();
 		rightPanel.setBackground(null);
 		add(rightPanel);
