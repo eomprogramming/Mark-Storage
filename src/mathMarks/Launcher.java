@@ -1,3 +1,4 @@
+package mathMarks;
 /**
  * What do you think it does? 
  * @author Aly
