@@ -1,13 +1,16 @@
 package mathMarks;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class DatabaseAccess {
 	private File location;
+	ArrayList<Student> students; //stores all students in the school, sorted by id
+	
 	
 	public DatabaseAccess(File location)
 	{
-		
+		this.location = location;
 	}
 	
 	public DatabaseAccess getDefault()
@@ -22,17 +25,38 @@ public class DatabaseAccess {
 	
 	public Student getStudent(String id)
 	{
+		int a = findStudent(id, students.size(), 0);
+		if(a >= 0)
+			return students.get(a);
 		return null;
+	}
+	
+	private int findStudent(String id, int top, int bot)
+	{
+		if(top < bot)
+			return -1;
+		int m = (top + bot)/2;
+		
+		if(id.compareTo(students.get(m).getId()) > 0)
+			return findStudent(id, top, m+1);
+		if(id.compareTo(students.get(m).getId()) < 0)
+			return findStudent(id, m-1, bot);
+		else
+			return m;
 	}
 	
 	public Student newStudent(String id, String name, int grade)
 	{
-		return null;
+		Student nStudent = new Student(id, name, grade);
+		students.add(nStudent);
+		return nStudent;
 	}
 	
 	public void deleteStudent(String id)
 	{
-		
+		int a = findStudent(id, students.size(), 0);
+		if(a >= 0)
+			students.remove(a);
 	}
 	
 	public Course getCourse(String code)
