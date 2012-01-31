@@ -15,13 +15,11 @@ import javax.swing.UIManager.LookAndFeelInfo;
 public class MainFrame extends JFrame implements ActionListener{
 	
 	private ArrayList<String> students = new ArrayList<String>();
-	private ArrayList<String> courses = new ArrayList<String>();
-	private ArrayList<String> classes = new ArrayList<String>();
 	
 	private JList list;
 	private JScrollPane listPane;
 	
-	private JComboBox coursesBox, classesBox;
+	private JButton chooseButton, addButton;
 	
 	/**
 	 * 
@@ -57,14 +55,6 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	private void setValues() {
 		//read something
-		courses.add("Select A Course");
-		courses.add("Aly Course |  ALY4U");
-		
-		//read something
-		classes.add("Select A Class");
-		classes.add("Mr. ALYALYALY Period 3  |  ALY4U-02");
-		
-		//read something
 		students.add("ALY");
 		students.add("Aly improved");
 		for(int i=0;i<20;i++)
@@ -90,8 +80,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		list = new JList(model);
 		list.setFocusable(false);
-		list.setBackground(new Color(223,251,160));
 		list.setVisible(false);
+		list.setBackground(new Color(223,251,160));
 		list.setBorder(BorderFactory.createLineBorder(new Color(80,170,0)));
 		leftPanel.add(list);		
 		
@@ -115,45 +105,38 @@ public class MainFrame extends JFrame implements ActionListener{
 		leftLayout.putConstraint(SpringLayout.EAST, listPane, -20, 
 				SpringLayout.EAST, leftPanel);
 		
-		/*   MAKE THE COURSES COMBO BOX */
+		/*   MAKE THE ADD A CLASS BUTTON */		
 		
-		String[] courseChoices = new String[courses.size()];
-		for(int i=0;i<courseChoices.length;i++)
-			courseChoices[i] = courses.get(i);
+		addButton = new JButton("Add a class");
+		addButton.setFocusable(false);
+		addButton.addActionListener(this);
+		leftPanel.add(addButton);
 		
-		coursesBox = new JComboBox(courseChoices);
-		coursesBox.setFocusable(false);
-		coursesBox.addActionListener(this);
-		leftPanel.add(coursesBox);
-		
-		leftLayout.putConstraint(SpringLayout.NORTH, coursesBox, 20, 
+		leftLayout.putConstraint(SpringLayout.NORTH, addButton, 20, 
 				SpringLayout.NORTH, leftPanel);
-		leftLayout.putConstraint(SpringLayout.WEST, coursesBox, 20, 
+		leftLayout.putConstraint(SpringLayout.WEST, addButton, 20, 
 				SpringLayout.WEST, leftPanel);
-		
-		/*   MAKE THE CLASSES COMBO BOX */
-		
-		String[] classChoices = new String[classes.size()];
-		for(int i=0;i<classChoices.length;i++)
-			classChoices[i] = classes.get(i);
-		
-		classesBox = new JComboBox(classChoices);
-		classesBox.setFocusable(false);
-		classesBox.setEnabled(false);
-		classesBox.addActionListener(this);
-		leftPanel.add(classesBox);
-		
-		leftLayout.putConstraint(SpringLayout.NORTH, classesBox, 10, 
-				SpringLayout.SOUTH, coursesBox);
-		leftLayout.putConstraint(SpringLayout.EAST, classesBox, -20, 
+		leftLayout.putConstraint(SpringLayout.EAST, addButton, -20, 
 				SpringLayout.EAST, leftPanel);
-		leftLayout.putConstraint(SpringLayout.WEST, classesBox, 20, 
+		
+		/*   MAKE THE CHOOSE A CLASS BUTTON */
+	
+		chooseButton = new JButton("Select a class");
+		chooseButton.setFocusable(false);
+		chooseButton.addActionListener(this);
+		leftPanel.add(chooseButton);
+		
+		leftLayout.putConstraint(SpringLayout.NORTH, chooseButton, 10, 
+				SpringLayout.SOUTH, addButton);
+		leftLayout.putConstraint(SpringLayout.EAST, chooseButton, -20, 
+				SpringLayout.EAST, leftPanel);
+		leftLayout.putConstraint(SpringLayout.WEST, chooseButton, 20, 
 				SpringLayout.WEST, leftPanel);
 		
 		leftLayout.putConstraint(SpringLayout.NORTH, list, 20, 
-				SpringLayout.SOUTH, classesBox);
+				SpringLayout.SOUTH, chooseButton);
 		leftLayout.putConstraint(SpringLayout.NORTH, listPane, 20, 
-				SpringLayout.SOUTH, classesBox);
+				SpringLayout.SOUTH, chooseButton);
 				
 		JPanel rightPanel = new JPanel();
 		rightPanel.setBackground(null);
@@ -164,22 +147,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	 * 
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == coursesBox){
-			if(coursesBox.getSelectedIndex()>0)
-				classesBox.setEnabled(true);
-			else{
-				classesBox.setEnabled(false);
-				classesBox.setSelectedIndex(0);
-			}
-		}else if(e.getSource() == classesBox){
-			if(classesBox.getSelectedIndex()>0){
-				list.setVisible(true);
-				listPane.setVisible(list.isVisible());
-			}else{
-				list.setVisible(false);
-				listPane.setVisible(list.isVisible());
-			}
-		}
+		
 	}
 	
 	

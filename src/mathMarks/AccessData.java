@@ -60,11 +60,9 @@ public class AccessData {
 			JFileChooser choose = new JFileChooser();
 			if(choose.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
 				String s = choose.getSelectedFile().getPath();
+				
 			}
-		} catch (HeadlessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		} catch (HeadlessException e1) {}
 		
 		return null;
 	}

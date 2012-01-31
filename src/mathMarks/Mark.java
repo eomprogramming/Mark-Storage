@@ -26,6 +26,9 @@ public class Mark {
 	 */
 	public static int compareLevels(String a, String b)
 	{
+		a = a.trim();
+		b = b.trim();
+		
 		if(a.substring(0, 1).compareTo(b.substring(0, 1)) > 0)
 			return 1;
 		if(a.substring(0, 1).compareTo(b.substring(0, 1)) < 0)
