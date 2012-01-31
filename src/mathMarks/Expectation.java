@@ -7,7 +7,9 @@ public class Expectation {
 	
 	public Expectation(Course course, String name, String desc)
 	{
-		
+		this.course = course;
+		this.name = name;
+		description = desc;
 	}
 	
 	public Course getCourse()
@@ -17,7 +19,7 @@ public class Expectation {
 	
 	public String getName()
 	{
-		return description;
+		return name;
 	}
 	
 	public String getDescription()
@@ -27,6 +29,6 @@ public class Expectation {
 	
 	public void setDescriptoin(String desc)
 	{
-		
+		description = desc;
 	}
 }
