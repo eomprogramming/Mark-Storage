@@ -16,12 +16,12 @@ public class Classroom {
 	 * @param semester
 	 * @param section
 	 */
-	public Classroom(Course course, boolean semester, String section)
+	public Classroom(Course course, boolean semester, String section, String year)
 	{
 		this.course = course;
 		this.semesterOne = semester;
 		this.section = section;
-		year = Calendar.getInstance().get(Calendar.YEAR);		
+		this.year = year;		
 	}
 	
 	/**

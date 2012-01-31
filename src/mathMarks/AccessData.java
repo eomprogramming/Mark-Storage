@@ -2,17 +2,15 @@ package mathMarks;
 
 import java.awt.HeadlessException;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class AccessData {
 	private File location;
-	ArrayList<Student> students;
-	Classroom classroom;
+	private ArrayList<Student> students;
+	private Classroom classroom;
 	
 	public AccessData(File l)
 	{
@@ -56,15 +54,22 @@ public class AccessData {
 	
 	public Classroom chooseClassroom(JFrame f)
 	{
+		String s;
 		try {
 			JFileChooser choose = new JFileChooser();
+			choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			if(choose.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
-				String s = choose.getSelectedFile().getPath();
+				s = choose.getSelectedFile().getPath();
 			}
 		} catch (HeadlessException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		int section = Integer.parseInt(s.substring(s.length()-2, s.length()));
+		String course = s.substring(s., s.length(s.length()-2)
+		
+		Classroom c = new Classroom();
 		
 		return null;
 	}
