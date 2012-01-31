@@ -21,8 +21,7 @@ public class Classroom {
 		this.course = course;
 		this.semesterOne = semester;
 		this.section = section;
-		year = Calendar.getInstance().getWeekYear();
-		
+		year = Calendar.getInstance().get(Calendar.YEAR);		
 	}
 	
 	/**
