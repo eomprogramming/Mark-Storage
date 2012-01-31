@@ -8,7 +8,7 @@ public class Course {
 	
 	public Course(String code)
 	{
-		
+		this.code = code; 
 	}
 	
 	public Expectation[] getExpectations()
@@ -18,11 +18,11 @@ public class Course {
 	
 	public void addExpectations(Expectation expect)
 	{
-		
+		expectations.offer(expect);
 	}
 	
 	public void removeExpectation(int index)
 	{
-		
+		expectations.remove(index);
 	}
 }

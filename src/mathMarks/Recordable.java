@@ -1,6 +1,6 @@
 package mathMarks;
 
-import org.jdom.element;
+import javax.lang.model.element.Element;
 
 public interface Recordable {
 	public Element serialize();

@@ -7,11 +7,14 @@ public class Mark {
 	
 	public Mark(Expectation expect, String level, String comment)
 	{
-		
+		this.expect = expect;
+		this.level = level;
+		this.comment = comment;
 	}
 	
-	public int compareLEvels(String a, String b)
+	public int compareLevels(String a, String b)
 	{
+		//not sure how this works..
 		return 0;
 	}
 	
@@ -32,11 +35,11 @@ public class Mark {
 	
 	public void setComment(String comment)
 	{
-		
+		comment += "\n" + comment;
 	}
 	
 	public void setLevel(String level)
 	{
-		
+		this.level = level;
 	}
 }
