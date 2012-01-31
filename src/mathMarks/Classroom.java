@@ -1,12 +1,12 @@
  package mathMarks;
 
-import java.util.Calendar;
+//import java.util.Calendar;
 import java.util.LinkedList;
 
 public class Classroom {
 	private Course course;
 	private LinkedList<Student> student;
-	private int year;
+	private String year;
 	private boolean semesterOne;
 	private String section;
 	

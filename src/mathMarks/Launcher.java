@@ -18,7 +18,7 @@ public class Launcher {
 //		File file = new File("New Folder");
 //		file.mkdirs();
 		AccessData a = new AccessData(new File(""));
-		a.chooseClassroom(null);
+	//	a.chooseClassroom(null);
 		new MainFrame();
 	}
 }
