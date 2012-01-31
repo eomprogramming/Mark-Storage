@@ -12,7 +12,10 @@ public class Launcher {
 	 * @param args
 	 */
 	public static void main(String args[]){
-		System.out.println("+".compareTo("-"));
+		//The code to make folders
+//		File file = new File("New Folder");
+//		file.mkdirs();
+		
 		new MainFrame();
 	}
 }
