@@ -7,22 +7,39 @@ public class DatabaseAccess {
 	private File location;
 	ArrayList<Student> students; //stores all students in the school, sorted by id
 	
-	
+	/**
+	 * 
+	 * @param location
+	 */
 	public DatabaseAccess(File location)
 	{
 		this.location = location;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public DatabaseAccess getDefault()
 	{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param loc
+	 * @return
+	 */
 	public DatabaseAccess getAccessForLocation(File loc)
 	{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Student getStudent(String id)
 	{
 		int a = findStudent(id, students.size(), 0);
@@ -31,6 +48,13 @@ public class DatabaseAccess {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param top
+	 * @param bot
+	 * @return
+	 */
 	private int findStudent(String id, int top, int bot)
 	{
 		if(top < bot)
@@ -44,6 +68,13 @@ public class DatabaseAccess {
 		return m;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param name
+	 * @param grade
+	 * @return
+	 */
 	public Student newStudent(String id, String name, int grade)
 	{
 		Student nStudent = new Student(id, name, grade);
@@ -51,6 +82,10 @@ public class DatabaseAccess {
 		return nStudent;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 */
 	public void deleteStudent(String id)
 	{
 		int a = findStudent(id, students.size(), 0);
@@ -58,46 +93,84 @@ public class DatabaseAccess {
 			students.remove(a);
 	}
 	
+	/**
+	 * 
+	 * @param code
+	 * @return
+	 */
 	public Course getCourse(String code)
 	{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param code
+	 * @return
+	 */
 	public Course newCourse(String code)
 	{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param code
+	 */
 	public void removeCourse(String code)
 	{
 		
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Classroom getClassroom(String id)
 	{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Classroom newClassroom(String id)
 	{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 */
 	public void removeClassroom(String id)
 	{
 		
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 */
 	public void markAsChanged(Recordable id)
 	{
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public void flushPartial()
 	{
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public void flush()
 	{
 		

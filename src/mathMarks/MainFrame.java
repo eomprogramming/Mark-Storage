@@ -23,6 +23,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	private JComboBox coursesBox, classesBox;
 	
+	/**
+	 * 
+	 */
 	public MainFrame(){
 		super("Manage Students' Marks");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,6 +52,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		repaint();
 	}
 
+	/**
+	 * 
+	 */
 	private void setValues() {
 		//read something
 		courses.add("Select A Course");
@@ -65,6 +71,9 @@ public class MainFrame extends JFrame implements ActionListener{
 			students.add("Student "+(i+1));
 	}
 
+	/**
+	 * 
+	 */
 	private void createComponents() {
 		
 		JPanel leftPanel = new JPanel();
@@ -151,6 +160,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		add(rightPanel);
 	}
 
+	/**
+	 * 
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == coursesBox){
 			if(coursesBox.getSelectedIndex()>0)
