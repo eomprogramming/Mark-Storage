@@ -76,8 +76,9 @@ public class AccessData {
 		
 	}
 	
-	public void newClassroom(String id)
+	public Classroom newClassroom(String id)
 	{
-		
+		File file = new File(location + "\\" + id);
+		file.mkdirs();
 	}
 }
