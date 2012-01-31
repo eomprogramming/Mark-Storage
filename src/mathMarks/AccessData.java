@@ -54,7 +54,7 @@ public class AccessData {
 	
 	public Classroom chooseClassroom(JFrame f)
 	{
-		String s;
+		String s="";
 		try {
 			JFileChooser choose = new JFileChooser();
 			choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -63,12 +63,24 @@ public class AccessData {
 			}
 		} catch (HeadlessException e1) {}
 		
-		int section = Integer.parseInt(s.substring(s.length()-2, s.length()));
-		String course = s.substring(s., s.length(s.length()-2)
-		
-		Classroom c = new Classroom();
-		
-		return null;
+		try{
+			String section =s.substring(s.length()-2, s.length());
+			char slash = '\\';
+			if(s.contains("/"))
+				slash = '/';			
+			
+			String code = s.substring(s.lastIndexOf(slash)+1, s.lastIndexOf("-"));
+			
+			s = s.substring(0, s.lastIndexOf(slash));
+			String year = s.substring(s.lastIndexOf(slash)+1,s.lastIndexOf(slash)+5);
+			
+			return new Classroom(new Course(code),s.endsWith("1"),section,year);
+			
+		}catch(Exception e){
+			System.err.println("ERROR - Could not read Classroom.");
+			return null;
+
+		}
 	}
 	
 	public void removeCourse(String code)
