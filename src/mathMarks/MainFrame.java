@@ -11,6 +11,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
  * @author Aly
  *
  */
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener{
 	
 	private ArrayList<String> students = new ArrayList<String>();

@@ -35,7 +35,12 @@ public class Mark {
 	
 	public void setComment(String comment)
 	{
-		comment += "\n" + comment;
+		this.comment = comment;
+	}
+	
+	public void addComment(String comment)
+	{
+		this.comment += "\n" + comment;
 	}
 	
 	public void setLevel(String level)

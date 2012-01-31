@@ -10,17 +10,20 @@ public class Student {
 	
 	public Student(String id, String name, int grade)
 	{
-		
+		this.id = id;
+		this.name = name;
+		this.grade = grade;
 	}
 	
 	public void change(String name, int grade)
 	{
-		
+		this.name = name;
+		this.grade = grade;
 	}
 	
 	public void promoteGrade()
 	{
-		
+		//not sure how this works
 	}
 	
 	public String getName()
@@ -38,13 +41,13 @@ public class Student {
 		return (Mark[]) marks.toArray();
 	}
 	
-	public void addMarks()
+	public void addMark(Mark mark)
 	{
-		
+		marks.add(mark);
 	}
 	
 	public void removeMark(int index)
 	{
-		
+		marks.remove(index);
 	}
 }

@@ -1,4 +1,5 @@
 package mathMarks;
+
 /**
  * What do you think it does? 
  * @author Aly
@@ -6,6 +7,6 @@ package mathMarks;
  */
 public class Launcher {
 	public static void main(String args[]){
-		new MainFrame();
+		MainFrame m = new MainFrame();
 	}
 }
