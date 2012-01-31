@@ -12,9 +12,33 @@ public class Mark {
 		this.comment = comment;
 	}
 	
-	public int compareLevels(String a, String b)
+	public static int compareLevels(String a, String b)
 	{
-		//not sure how this works..
+		if(a.substring(0, 1).compareTo(b.substring(0, 1)) > 0)
+			return 1;
+		if(a.substring(0, 1).compareTo(b.substring(0, 1)) < 0)
+			return -1;
+		if(a.length() == 2 && b.length() == 2)
+		{
+			if(a.substring(1, 2).compareTo(b.substring(1, 2)) < 0)
+				return 1;
+			if(a.substring(1, 2).compareTo(b.substring(1, 2)) > 0)
+				return -1;
+		}
+		if(a.length() == 1 && b.length() == 2)
+		{
+			if(b.substring(1, 2).equals("+"))
+				return -1;
+			if(b.substring(1, 2).equals("-"))
+				return 1;
+		}
+		if(a.length() == 2 && b.length() == 1)
+		{
+			if(a.substring(1, 2).equals("+"))
+				return 1;
+			if(a.substring(1, 2).equals("-"))
+				return -1;
+		}
 		return 0;
 	}
 	

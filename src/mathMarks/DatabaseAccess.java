@@ -41,8 +41,7 @@ public class DatabaseAccess {
 			return findStudent(id, top, m+1);
 		if(id.compareTo(students.get(m).getId()) < 0)
 			return findStudent(id, m-1, bot);
-		else
-			return m;
+		return m;
 	}
 	
 	public Student newStudent(String id, String name, int grade)

@@ -7,6 +7,7 @@ package mathMarks;
  */
 public class Launcher {
 	public static void main(String args[]){
-		MainFrame m = new MainFrame();
+		System.out.println("+".compareTo("-"));
+		new MainFrame();
 	}
 }
