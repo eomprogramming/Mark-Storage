@@ -7,7 +7,7 @@ Credits
 -------
 
 [Earl of March Computer Club](http://eomprogramming.isgreat.org/acta/acta.htm)
-*Hao
-*Aly
-*Ian
-*...*hopefully* more to come.
+* Hao
+* Aly
+* Ian
+* ...*hopefully* more to come.
