@@ -17,7 +17,6 @@ public class Launcher {
 		//The code to make folders
 //		File file = new File("New Folder");
 //		file.mkdirs();
-		AccessData a = new AccessData(new File(""));
 	//	a.chooseClassroom(null);
 		new MainFrame();
 	}

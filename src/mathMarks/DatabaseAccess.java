@@ -1,7 +1,11 @@
 package mathMarks;
 
+import java.awt.HeadlessException;
 import java.io.File;
 import java.util.ArrayList;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 public class DatabaseAccess {
 	private File location;
@@ -127,9 +131,35 @@ public class DatabaseAccess {
 	 * @param id
 	 * @return
 	 */
-	public Classroom getClassroom(String id)
+	public Classroom getClassroom(JFrame f)
 	{
-		return null;
+		String s="";
+		try {
+			JFileChooser choose = new JFileChooser();
+			choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			if(choose.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
+				s = choose.getSelectedFile().getPath();
+			}
+		} catch (HeadlessException e1) {}
+		
+		try{
+			String section =s.substring(s.length()-2, s.length());
+			char slash = '\\';
+			if(s.contains("/"))
+				slash = '/';			
+			
+			String code = s.substring(s.lastIndexOf(slash)+1, s.lastIndexOf("-"));
+			
+			s = s.substring(0, s.lastIndexOf(slash));
+			String year = s.substring(s.lastIndexOf(slash)+1,s.lastIndexOf(slash)+5);
+			
+			return new Classroom(new Course(code),s.endsWith("1"),section,year);
+			
+		}catch(Exception e){
+			System.err.println("ERROR - Could not read Classroom.");
+			return null;
+
+		}
 	}
 	
 	/**
@@ -137,8 +167,10 @@ public class DatabaseAccess {
 	 * @param id
 	 * @return
 	 */
-	public Classroom newClassroom(String id)
+	public Classroom newClassroom(String year, int semester, String courseCode)
 	{
+		
+		
 		return null;
 	}
 	
@@ -146,7 +178,7 @@ public class DatabaseAccess {
 	 * 
 	 * @param id
 	 */
-	public void removeClassroom(String id)
+	public void removeClassroom(String year, int semester, String courseCode)
 	{
 		
 	}

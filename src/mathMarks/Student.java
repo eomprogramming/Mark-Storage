@@ -6,7 +6,7 @@ public class Student {
 	private String id;
 	private String name;
 	private int grade;
-	private LinkedList<Mark> marks;
+	//private LinkedList<Mark> marks;
 	
 	/**
 	 * 
@@ -69,28 +69,28 @@ public class Student {
 	
 	/**
 	 * 
-	 * @return
+	 * @return all marks for a given student
 	 */
-	public Mark[] getMarks()
+	public Mark[] getMarks(Classroom c)
 	{
-		return (Mark[]) marks.toArray();
+		return null;
 	}
 	
 	/**
-	 * 
+	 * adds mark to the correct expectatoin file
 	 * @param mark
 	 */
-	public void addMark(Mark mark)
+	public void addMark(Classroom c, Mark mark)
 	{
-		marks.add(mark);
+		
 	}
 	
 	/**
-	 * 
+	 * removes the last mark for a certain expectation
 	 * @param index
 	 */
-	public void removeMark(int index)
+	public void removeMark(Classroom c, Expectation expectation)
 	{
-		marks.remove(index);
+		
 	}
 }

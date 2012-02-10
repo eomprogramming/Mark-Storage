@@ -50,4 +50,9 @@ public class Classroom {
 	{
 		student.remove(index);
 	}
+	
+	public void saveStudentList()
+	{
+		
+	}
 }
