@@ -1,5 +1,7 @@
 package mathMarks;
 
+import gui.MainFrame;
+
 import java.io.File;
 
 /**
