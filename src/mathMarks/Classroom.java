@@ -2,6 +2,7 @@
 
 //import java.util.Calendar;
 import java.io.File;
+import java.util.Calendar;
 import java.util.LinkedList;
 
 public class Classroom {
@@ -54,7 +55,7 @@ public class Classroom {
 	
 	public void saveStudentList()
 	{
-		String path = "database\\" + year +" semester ";
+		String path = DatabaseAccess.getLocation().getPath()+"\\" + year +" semester ";
 		if(semesterOne)
 			path+="1\\";
 		else
@@ -63,6 +64,11 @@ public class Classroom {
 		path+=course.code+"-"+section;
 		
 		File file = new File(path);
+		
+		//Add time stamp
+		Calendar cal = Calendar.getInstance();
+		System.out.print("["+cal.getTime().toString().substring(0, cal.getTime().toString().length()-9)+"] ");
+		
 		System.out.println(file.getPath()+"  created");
 		file.mkdirs();		
 	}

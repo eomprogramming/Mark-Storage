@@ -14,7 +14,7 @@ public class Course {
 	public Course(String code)
 	{
 		this.code = code;
-		readExpectationsFromfile();
+		//readExpectationsFromfile();
 	}
 	
 	public void readExpectationsFromfile()
@@ -38,8 +38,8 @@ public class Course {
 				e.printStackTrace();
 			}
 		}
-		
-		this.expectations = expectations;
+		//THE ABOVE CODE NEEDS FIXING!
+	//	this.expectations = expectations;
 	}
 	
 	/**
