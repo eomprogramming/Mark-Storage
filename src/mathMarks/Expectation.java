@@ -53,4 +53,9 @@ public class Expectation {
 	{
 		description = desc;
 	}
+	
+	public boolean equals(Expectation e)
+	{
+		return e.getCourse().equals(getCourse()) && e.getName().equals(getName());
+	}
 }
