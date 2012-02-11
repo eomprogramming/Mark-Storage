@@ -1,6 +1,7 @@
  package mathMarks;
 
 //import java.util.Calendar;
+import java.io.File;
 import java.util.LinkedList;
 
 public class Classroom {
@@ -53,6 +54,16 @@ public class Classroom {
 	
 	public void saveStudentList()
 	{
+		String path = "database\\" + year +" semester ";
+		if(semesterOne)
+			path+="1\\";
+		else
+			path+="2\\";
 		
+		path+=course.code+"-"+section;
+		
+		File file = new File(path);
+		System.out.println(file.getPath()+"  created");
+		file.mkdirs();		
 	}
 }
