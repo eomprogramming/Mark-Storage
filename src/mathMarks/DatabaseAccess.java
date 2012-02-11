@@ -20,7 +20,7 @@ public class DatabaseAccess {
 	 */
 	public DatabaseAccess(File location)
 	{
-		this.setLocation(location);
+		DatabaseAccess.setLocation(location);
 		readStudentList();
 	}
 	
@@ -244,21 +244,21 @@ public class DatabaseAccess {
 			path+="2\\";
 		
 		path+=courseCode;		
-		File file = new File(path);		
+		File file = new File(path);			
 		
 		//Add time stamp
 		Calendar cal = Calendar.getInstance();
-		System.out.print("["+cal.getTime().toString().substring(0, cal.getTime().toString().length()-9)+"] ");
-		
+		System.out.print("["+cal.getTime().toString().substring(0, cal.getTime().toString().length()-9)+"] ");		
 		System.out.println(file.getPath()+"  created.");
-		file.mkdirs();		
 		
+		file.mkdirs();				
 		Classroom c = new Classroom(new Course(courseCode.substring(0,courseCode.length()-3)),
 				semesterOne,courseCode.substring(courseCode.length()-2, courseCode.length()),year);;
 		
+		//this probably shouldn't be made here
 		path = c.getPath() + "class list.txt";
 		IO.createOutputFile(path);
-		IO.closeOutputFile();
+		IO.closeOutputFile();	
 		
 		return c;
 	}
@@ -305,6 +305,7 @@ public class DatabaseAccess {
 	}
 
 	public static void setLocation(File location) {
-		DatabaseAccess.location = location;
+		if(location != null)
+			DatabaseAccess.location = location;
 	}
 }
