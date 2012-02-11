@@ -120,7 +120,9 @@ public class DatabaseAccess {
 	 */
 	public Course newCourse(String code)
 	{
-		return null;
+		Course c = new Course(code);
+		c.saveChanges();
+		return c;
 	}
 	
 	/**

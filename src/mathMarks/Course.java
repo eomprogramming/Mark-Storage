@@ -14,7 +14,7 @@ public class Course {
 	public Course(String code)
 	{
 		this.code = code;
-		//readExpectationsFromfile();
+		readExpectationsFromfile();
 	}
 	
 	public void readExpectationsFromfile()
@@ -70,6 +70,17 @@ public class Course {
 	
 	public void saveChanges()
 	{
-		
+		String path = DatabaseAccess.location.getName() + "\\courses\\" + code + ".txt";
+		IO.createOutputFile(path);
+		for(int i = 0; i < expectations.size(); i++)
+		{
+			IO.println(expectations.get(i).getName() + "\n" + expectations.get(i).getDescription());
+		}
+		try {
+			IO.closeInputFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
