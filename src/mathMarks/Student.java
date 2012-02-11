@@ -1,5 +1,6 @@
 package mathMarks;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -124,7 +125,11 @@ public class Student {
 	 */
 	public void addMark(Classroom c, Mark mark)
 	{
-		IO.createOutputFile(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark");
+		if (new File(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark").exists())
+			IO.createOutputFile(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark",true);
+		else
+			IO.createOutputFile(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark");
+		
 		IO.println(mark.getLevel());
 		IO.println(mark.getComment());
 		IO.closeOutputFile();
