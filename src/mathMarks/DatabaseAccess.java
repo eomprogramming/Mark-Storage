@@ -98,6 +98,11 @@ public class DatabaseAccess {
 			students.remove(a);
 	}
 	
+	public void saveStudentList()
+	{
+		
+	}
+	
 	/**
 	 * 
 	 * @param code
@@ -105,7 +110,6 @@ public class DatabaseAccess {
 	 */
 	public Course getCourse(String code)
 	{
-		
 		return new Course(code);
 	}
 	

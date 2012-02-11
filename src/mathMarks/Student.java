@@ -67,11 +67,17 @@ public class Student {
 		return grade;
 	}
 	
+	public Mark[] getMarks(Classroom c, Expectation e)
+	{
+		
+		return null;
+	}
+	
 	/**
 	 * 
 	 * @return all marks for a given student
 	 */
-	public Mark[] getMarks(Classroom c)
+	public Mark[] getAllMarks(Classroom c)
 	{
 		
 		return null;

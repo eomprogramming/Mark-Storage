@@ -38,8 +38,7 @@ public class Course {
 				e.printStackTrace();
 			}
 		}
-		//THE ABOVE CODE NEEDS FIXING!
-	//	this.expectations = expectations;
+		this.expectations = expectations;
 	}
 	
 	/**
