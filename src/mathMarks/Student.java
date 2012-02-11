@@ -142,6 +142,10 @@ public class Student {
 	 */
 	public void removeMark(Classroom c, Expectation expectation)
 	{
-		
+		LinkedList <Mark> marks = getMarks(c,expectation);
+		marks.removeLast();
+		new File(c.getPath()+"\\"+expectation.getName()+"\\"+id+".mark").delete();
+		for(Mark m : marks)
+			addMark(c,m);
 	}
 }
