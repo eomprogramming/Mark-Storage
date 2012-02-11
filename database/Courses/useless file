@@ -1,0 +1,17 @@
+<class teacher = "Ms. C">
+	<student>
+		<firstName>Aly</fistName>
+		<lastName>Hassan</lastName>
+		<number>s19999999</number>
+	</student>
+	<student>
+		<firstName>Ian</fistName>
+		<lastName>Dewan</lastName>
+		<number>s18888888</number>
+	</student>
+	<student>
+		<firstName>Hao</fistName>
+		<lastName>Wei</lastName>
+		<number>s17777777</number>
+	</student>
+</class>
