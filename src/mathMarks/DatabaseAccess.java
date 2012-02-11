@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class DatabaseAccess {
 	public static File location;
@@ -121,16 +122,12 @@ public class DatabaseAccess {
 	 */
 	public Course newCourse(String code)
 	{
-		String path = DatabaseAccess.location.getName() + "\\courses\\" + code + ".txt";
-		IO.openInputFile(path);
+		String path = DatabaseAccess.location.getName() + "\\Courses\\" + code + ".txt";
+		IO.createOutputFile(path);
+		IO.closeOutputFile();
 		Course c = new Course(code);
 		
-		try {
-			IO.closeInputFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return c;
 	}
 	

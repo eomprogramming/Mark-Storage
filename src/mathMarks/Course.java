@@ -19,14 +19,16 @@ public class Course {
 	
 	public void readExpectationsFromfile()
 	{
-		String path = DatabaseAccess.location.getName() + "\\" + "Courses" + code + ".txt";
+		String path = DatabaseAccess.location.getName() + "\\" + "Courses\\" + code + ".txt";
 		LinkedList<Expectation> expectations = new LinkedList<Expectation>();
 		String s;
 		for(;;)
 		{
+			
 			IO.openInputFile(path);
 			try {
 				s = IO.readLine();
+				System.out.println(s);
 				if(s == null)
 				{
 					System.out.println("break");

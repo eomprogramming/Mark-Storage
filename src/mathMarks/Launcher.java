@@ -18,7 +18,9 @@ public class Launcher {
 	 */
 	public static void main(String args[]){
 		Student s = new Student("S199","Aly",11);
-		s.addMark(new DatabaseAccess(new File("database")).newClassroom("2012", true, "ICS3U-02"), new Mark(new Expectation(new Course("ICS3U-01"),"exp 1","bla ba"),"4","good"));
+		DatabaseAccess d = new DatabaseAccess(new File("database"));
+		Course c = d.newCourse("ICS3U");
+		s.addMark(d.newClassroom("2012", true, "ICS3U-02"), new Mark(new Expectation(c,"exp 1","bla ba"),"4","good"));
 		
 		new MainFrame();
 	}
