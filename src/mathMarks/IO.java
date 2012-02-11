@@ -54,8 +54,9 @@ public class IO
 			fileOut = new PrintWriter(new BufferedWriter(new FileWriter(fileName,append)));
 		}
 		catch(IOException e)
-		{
+		{e.printStackTrace();
 			System.out.println("*** Cannot create file: " + fileName + " ***");
+			
 		}
 	}
 	

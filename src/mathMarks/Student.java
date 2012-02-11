@@ -89,6 +89,10 @@ public class Student {
 	 */
 	public void addMark(Classroom c, Mark mark)
 	{
+		IO.createOutputFile(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark");
+		IO.println(mark.getLevel());
+		IO.println(mark.getComment());
+		IO.closeOutputFile();
 		
 	}
 	
