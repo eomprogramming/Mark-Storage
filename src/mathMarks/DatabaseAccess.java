@@ -121,9 +121,10 @@ public class DatabaseAccess {
 	 */
 	public Course newCourse(String code)
 	{
-		Course c = new Course(code);
 		String path = DatabaseAccess.location.getName() + "\\courses\\" + code + ".txt";
 		IO.openInputFile(path);
+		Course c = new Course(code);
+		
 		try {
 			IO.closeInputFile();
 		} catch (IOException e) {
