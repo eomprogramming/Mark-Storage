@@ -14,12 +14,12 @@ public class Course {
 	public Course(String code)
 	{
 		this.code = code;
-		readExpectationsFromfile();
+		//readExpectationsFromfile();
 	}
 	
 	public void readExpectationsFromfile()
 	{
-		String path = DatabaseAccess.location.getName() + "\\" + "Courses" + code + ".txt";
+		String path = DatabaseAccess.getLocation().getName() + "\\" + "Courses" + code + ".txt";
 		LinkedList<String> expectations = new LinkedList<String>();
 		String s;
 		for(;;)
@@ -38,8 +38,8 @@ public class Course {
 				e.printStackTrace();
 			}
 		}
-		
-		this.expectations = expectations;
+		//THE ABOVE CODE NEEDS FIXING!
+	//	this.expectations = expectations;
 	}
 	
 	/**

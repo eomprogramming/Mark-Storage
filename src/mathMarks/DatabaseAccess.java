@@ -2,15 +2,13 @@ package mathMarks;
 
 import java.awt.HeadlessException;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class DatabaseAccess {
-	public static File location;
+	private static File location;
 	ArrayList<Student> students; //stores all students in the school, sorted by id
 	
 	/**
@@ -212,7 +210,10 @@ public class DatabaseAccess {
 	}
 
 	public static File getLocation() {
-		return location;
+		if(location != null)
+			return location;
+		else
+			return new File("database");
 	}
 
 	public static void setLocation(File location) {
