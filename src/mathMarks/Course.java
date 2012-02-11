@@ -1,5 +1,6 @@
 package mathMarks;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Course {
@@ -13,6 +14,32 @@ public class Course {
 	public Course(String code)
 	{
 		this.code = code;
+		readExpectationsFromfile();
+	}
+	
+	public void readExpectationsFromfile()
+	{
+		String path = DatabaseAccess.location.getName() + "\\" + "Courses" + code + ".txt";
+		LinkedList<String> expectations = new LinkedList<String>();
+		String s;
+		for(;;)
+		{
+			IO.openInputFile(path);
+			try {
+				s = IO.readLine();
+				if(s == null)
+				{
+					IO.closeInputFile();
+					break;
+				}
+				expectations.add(s);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		this.expectations = expectations;
 	}
 	
 	/**
@@ -40,5 +67,10 @@ public class Course {
 	public void removeExpectation(int index)
 	{
 		expectations.remove(index);
+	}
+	
+	public void saveChanges()
+	{
+		
 	}
 }
