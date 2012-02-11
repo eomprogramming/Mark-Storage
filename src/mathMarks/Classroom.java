@@ -55,21 +55,6 @@ public class Classroom {
 	
 	public void saveStudentList()
 	{
-		String path = DatabaseAccess.getLocation().getPath()+"\\" + year +" semester ";
-		if(semesterOne)
-			path+="1\\";
-		else
-			path+="2\\";
 		
-		path+=course.code+"-"+section;
-		
-		File file = new File(path);
-		
-		//Add time stamp
-		Calendar cal = Calendar.getInstance();
-		System.out.print("["+cal.getTime().toString().substring(0, cal.getTime().toString().length()-9)+"] ");
-		
-		System.out.println(file.getPath()+"  created");
-		file.mkdirs();		
 	}
 }

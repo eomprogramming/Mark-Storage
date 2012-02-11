@@ -3,6 +3,7 @@ package mathMarks;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -165,14 +166,29 @@ public class DatabaseAccess {
 	
 	/**
 	 * 
-	 * @param id
+	 * @param courseCode Pass in "COURSE-O1" format
 	 * @return
 	 */
-	public Classroom newClassroom(String year, int semester, String courseCode)
+	public Classroom newClassroom(String year, boolean semesterOne, String courseCode)
 	{
+		String path = DatabaseAccess.getLocation().getPath()+"\\" + year +" semester ";
+		if(semesterOne)
+			path+="1\\";
+		else
+			path+="2\\";
 		
+		path+=courseCode;		
+		File file = new File(path);		
 		
-		return null;
+		//Add time stamp
+		Calendar cal = Calendar.getInstance();
+		System.out.print("["+cal.getTime().toString().substring(0, cal.getTime().toString().length()-9)+"] ");
+		
+		System.out.println(file.getPath()+"  created.");
+		file.mkdirs();		
+		
+		return new Classroom(new Course(courseCode.substring(0,courseCode.length()-3)),
+			semesterOne,courseCode.substring(courseCode.length()-2, courseCode.length()),year);
 	}
 	
 	/**

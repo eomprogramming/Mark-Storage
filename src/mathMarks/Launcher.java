@@ -17,8 +17,9 @@ public class Launcher {
 	 * @param args
 	 */
 	public static void main(String args[]){
-		Classroom c = new Classroom(new Course("ICS4U"),true,"03","2012");		
-		c.saveStudentList();
+		DatabaseAccess test = new DatabaseAccess(new File("database"));
+		test.newClassroom("2012", true, "ICS3U-02");
+		
 		new MainFrame();
 	}
 }
