@@ -19,7 +19,6 @@ public class Launcher {
 	public static void main(String args[]){
 		DatabaseAccess test = new DatabaseAccess(new File("database"));
 		test.newClassroom("2012", true, "ICS3U-02");
-		
 		new MainFrame();
 	}
 }
