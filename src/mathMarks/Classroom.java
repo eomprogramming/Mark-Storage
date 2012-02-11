@@ -1,8 +1,5 @@
  package mathMarks;
 
-//import java.util.Calendar;
-import java.io.File;
-import java.util.Calendar;
 import java.util.LinkedList;
 
 public class Classroom {
@@ -67,5 +64,9 @@ public class Classroom {
 		
 		path+=course.code+"-"+section;		
 		return path;
+	}
+	
+	public Course getCourse(){
+		return course;
 	}
 }

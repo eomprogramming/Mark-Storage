@@ -45,9 +45,13 @@ public class Course {
 	 * 
 	 * @return
 	 */
-	public Expectation[] getExpectations()
+	public LinkedList<Expectation> getExpectations()
 	{
-		return (Expectation[]) expectations.toArray();
+		/* TEMPORARY CODE! TO BE REMOVED */
+			expectations.offer(new Expectation(this,"exp 1","blah"));
+		/* END TEMPORARY CODE */
+					
+		return expectations;
 	}
 	
 	/**

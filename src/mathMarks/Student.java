@@ -1,5 +1,6 @@
 package mathMarks;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Student {
@@ -67,20 +68,54 @@ public class Student {
 		return grade;
 	}
 	
-	public Mark[] getMarks(Classroom c, Expectation e)
+	public LinkedList<Mark> getMarks(Classroom c, Expectation e)
 	{
-		
-		return null;
+		LinkedList<Mark> marks = new LinkedList<Mark>();
+		IO.openInputFile(c.getPath()+"\\"+e.getName()+"\\"+id+".mark");
+		while(true){
+			try {
+				String mark = IO.readLine();			
+				String comment = IO.readLine();
+				if(mark==null||comment==null){
+					IO.closeInputFile();
+					break;
+				}
+				marks.offer(new Mark(e,mark,comment));
+			} catch (Exception exp) {
+				exp.printStackTrace();
+				break;
+			}
+		}
+		return marks;
 	}
 	
 	/**
 	 * 
 	 * @return all marks for a given student
 	 */
-	public Mark[] getAllMarks(Classroom c)
+	public LinkedList<Mark> getAllMarks(Classroom c)
 	{
+		LinkedList<Expectation> expectations = c.getCourse().getExpectations();
+		LinkedList<Mark> marks = new LinkedList<Mark>();		
 		
-		return null;
+		for(Expectation e : expectations){
+			System.out.println(e.getName());
+			IO.openInputFile(c.getPath()+"\\"+e.getName()+"\\"+id+".mark");
+			while(true){
+				try {
+					String mark = IO.readLine();			
+					String comment = IO.readLine();
+					if(mark==null||comment==null){
+						IO.closeInputFile();
+						break;						
+					}
+					marks.offer(new Mark(e,mark,comment));
+				} catch (Exception exp) {
+					break;					
+				}
+			}
+		}
+		return marks;
 	}
 	
 	/**
