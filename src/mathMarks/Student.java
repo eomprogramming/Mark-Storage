@@ -73,11 +73,12 @@ public class Student {
 	 */
 	public Mark[] getMarks(Classroom c)
 	{
+		
 		return null;
 	}
 	
 	/**
-	 * adds mark to the correct expectatoin file
+	 * adds mark to the correct expectation file
 	 * @param mark
 	 */
 	public void addMark(Classroom c, Mark mark)

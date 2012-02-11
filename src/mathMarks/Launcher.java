@@ -16,10 +16,8 @@ public class Launcher {
 	 * @param args
 	 */
 	public static void main(String args[]){
-		//The code to make folders
-//		File file = new File("New Folder");
-//		file.mkdirs();
-	//	a.chooseClassroom(null);
+		Classroom c = new Classroom(new Course("ICS4U"),true,"03","2012");
+		c.saveStudentList();
 		new MainFrame();
 	}
 }
