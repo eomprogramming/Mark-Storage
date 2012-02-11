@@ -21,6 +21,7 @@ public class DatabaseAccess {
 	public DatabaseAccess(File location)
 	{
 		this.setLocation(location);
+		readStudentList();
 	}
 	
 	/**
@@ -100,9 +101,45 @@ public class DatabaseAccess {
 			students.remove(a);
 	}
 	
+	public void readStudentList()
+	{
+		String path = location.getName() + "\\students.txt";
+		
+		try {
+			IO.openInputFile(path);
+			String s = null;
+			for(;;)
+			{
+				s = IO.readLine();
+				if(s == null)
+				{
+					IO.closeInputFile();
+					break;
+				}
+				students.add(new Student(s, IO.readLine(), Integer.parseInt(IO.readLine())));
+			}
+		} catch (IOException e) {
+			IO.createOutputFile(path);
+			IO.closeOutputFile();
+		}
+		
+	}
+	
 	public void saveStudentList()
 	{
+		String path = location.getName() + "\\students.txt";
 		
+		IO.createOutputFile(path);
+		Student student;
+		for(int i = 0; i < students.size(); i++)
+		{
+			student = students.get(i);
+			IO.println(student.getId());
+			IO.println(student.getName());
+			IO.println(student.getGrade() + "");
+		}
+		
+		IO.closeOutputFile();
 	}
 	
 	/**
@@ -167,7 +204,24 @@ public class DatabaseAccess {
 			s = s.substring(0, s.lastIndexOf(slash));
 			String year = s.substring(s.lastIndexOf(slash)+1,s.lastIndexOf(slash)+5);
 			
-			return new Classroom(new Course(code),s.endsWith("1"),section,year);
+			Classroom c = new Classroom(new Course(code),s.endsWith("1"),section,year);
+			
+			String path = c.getPath() + "class list.txt";
+			IO.openInputFile(path);
+			String temp;
+			for(;;)
+			{
+				temp = IO.readLine();
+				if(temp == null)
+				{
+					IO.closeInputFile();
+					break;
+				}
+				
+				c.addStudent(getStudent(temp));
+			}
+			
+			return c;
 			
 		}catch(Exception e){
 			System.err.println("ERROR - Could not read Classroom.");
@@ -199,8 +253,14 @@ public class DatabaseAccess {
 		System.out.println(file.getPath()+"  created.");
 		file.mkdirs();		
 		
-		return new Classroom(new Course(courseCode.substring(0,courseCode.length()-3)),
-			semesterOne,courseCode.substring(courseCode.length()-2, courseCode.length()),year);
+		Classroom c = new Classroom(new Course(courseCode.substring(0,courseCode.length()-3)),
+				semesterOne,courseCode.substring(courseCode.length()-2, courseCode.length()),year);;
+		
+		path = c.getPath() + "class list.txt";
+		IO.createOutputFile(path);
+		IO.closeOutputFile();
+		
+		return c;
 	}
 	
 	/**

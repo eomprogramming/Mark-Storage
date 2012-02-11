@@ -50,9 +50,15 @@ public class Classroom {
 		student.remove(index);
 	}
 	
-	public void saveStudentList()
+	public void saveClassList()
 	{
-		
+		String path = getPath() + "class list.txt";
+		IO.createOutputFile(path);
+		for(int i = 0; i < student.size(); i++)
+		{
+			IO.println(student.get(i).getId());
+		}
+		IO.closeOutputFile();
 	}
 	
 	public String getPath(){
