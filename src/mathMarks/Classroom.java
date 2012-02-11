@@ -57,4 +57,15 @@ public class Classroom {
 	{
 		
 	}
+	
+	public String getPath(){
+		String path = DatabaseAccess.getLocation().getPath()+"\\" + year +" semester ";
+		if(semesterOne)
+			path+="1\\";
+		else
+			path+="2\\";
+		
+		path+=course.code+"-"+section;		
+		return path;
+	}
 }
