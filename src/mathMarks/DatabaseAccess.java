@@ -2,6 +2,7 @@ package mathMarks;
 
 import java.awt.HeadlessException;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -121,7 +122,14 @@ public class DatabaseAccess {
 	public Course newCourse(String code)
 	{
 		Course c = new Course(code);
-		c.saveChanges();
+		String path = DatabaseAccess.location.getName() + "\\courses\\" + code + ".txt";
+		IO.openInputFile(path);
+		try {
+			IO.closeInputFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return c;
 	}
 	
