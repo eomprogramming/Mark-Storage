@@ -20,7 +20,7 @@ public class Course {
 	public void readExpectationsFromfile()
 	{
 		String path = DatabaseAccess.location.getName() + "\\" + "Courses" + code + ".txt";
-		LinkedList<String> expectations = new LinkedList<String>();
+		LinkedList<Expectation> expectations = new LinkedList<Expectation>();
 		String s;
 		for(;;)
 		{
@@ -32,7 +32,7 @@ public class Course {
 					IO.closeInputFile();
 					break;
 				}
-				expectations.add(s);
+				expectations.add(new Expectation(this, s, IO.readLine()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
