@@ -29,14 +29,12 @@ public class Course {
 				s = IO.readLine();
 				if(s == null)
 				{
+					System.out.println("break");
 					IO.closeInputFile();
 					break;
 				}
 				expectations.add(new Expectation(this, s, IO.readLine()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (Exception e) {}
 		}
 		this.expectations = expectations;
 	}
