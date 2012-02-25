@@ -2,10 +2,13 @@
 
 import java.util.LinkedList;
 
-public class Classroom {
+import org.jdom.Element;
+
+public class Classroom implements Recordable{
+	private DatabaseAccess creator;
 	private Course course;
 	private LinkedList<Student> student;
-	private String year;
+	private int year;
 	private boolean semesterOne;
 	private String section;
 	
@@ -15,12 +18,18 @@ public class Classroom {
 	 * @param semester
 	 * @param section
 	 */
-	public Classroom(Course course, boolean semester, String section, String year)
+	protected Classroom(DatabaseAccess creator, Course course, int year,
+			boolean semester, String section)
 	{
+		this.creator = creator;
 		this.course = course;
 		this.semesterOne = semester;
 		this.section = section;
 		this.year = year;		
+	}
+	
+	public String getName() {
+		return (course.getCode() + "-" + section);
 	}
 	
 	/**
@@ -32,6 +41,14 @@ public class Classroom {
 		return (Student[]) student.toArray();
 	}
 	
+	public int getYear() {
+		return year;
+	}
+	
+	public boolean getSemester() {
+		return semesterOne;
+	}
+	
 	/**
 	 * 
 	 * @param student
@@ -39,6 +56,7 @@ public class Classroom {
 	public void addStudent(Student student)
 	{
 		this.student.add(student);
+		creator.markAsChanged(this);
 	}
 	
 	/**
@@ -48,31 +66,16 @@ public class Classroom {
 	public void removeStudent(int index)
 	{
 		student.remove(index);
-	}
-	
-	public void saveClassList()
-	{
-		String path = getPath() + "class list.txt";
-		IO.createOutputFile(path);
-		for(int i = 0; i < student.size(); i++)
-		{
-			IO.println(student.get(i).getId());
-		}
-		IO.closeOutputFile();
-	}
-	
-	public String getPath(){
-		String path = DatabaseAccess.getLocation().getPath()+"\\" + year +" semester ";
-		if(semesterOne)
-			path+="1\\";
-		else
-			path+="2\\";
-		
-		path+=course.code+"-"+section;		
-		return path;
+		creator.markAsChanged(this);
 	}
 	
 	public Course getCourse(){
 		return course;
+	}
+
+	@Override
+	public Element serialize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,66 +1,45 @@
 package mathMarks;
 
-import java.io.IOException;
 import java.util.LinkedList;
 
-public class Course {
-	public String code;
+import org.jdom.Element;
+
+public class Course implements Recordable {
+	private DatabaseAccess creator;
+	private String code;
 	private LinkedList<Expectation> expectations;
 	
 	/**
 	 * 
 	 * @param code
 	 */
-	public Course(String code)
+	protected Course(DatabaseAccess creator, String code)
 	{
 		this.code = code;
-		readExpectationsFromfile();
+		this.creator = creator;
 	}
 	
-	public void readExpectationsFromfile()
-	{
-		String path = DatabaseAccess.location.getName() + "\\" + "Courses\\" + code + ".txt";
-		LinkedList<Expectation> expectations = new LinkedList<Expectation>();
-		String s;
-		for(;;)
-		{
-			
-			IO.openInputFile(path);
-			try {
-				s = IO.readLine();
-				System.out.println(s);
-				if(s == null)
-				{
-					System.out.println("break");
-					IO.closeInputFile();
-					break;
-				}
-				expectations.add(new Expectation(this, s, IO.readLine()));
-			} catch (Exception e) {}
-		}
-		this.expectations = expectations;
+	public String getCode() {
+		return code;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public LinkedList<Expectation> getExpectations()
+	public Expectation[] getExpectations()
 	{
-		/* TEMPORARY CODE! TO BE REMOVED */
-			expectations.offer(new Expectation(this,"exp 1","blah"));
-		/* END TEMPORARY CODE */
-					
-		return expectations;
+		return expectations.toArray(new Expectation[] {});
 	}
 	
 	/**
 	 * 
 	 * @param expect
 	 */
-	public void addExpectations(Expectation expect)
+	protected void addExpectations(Expectation expect)
 	{
 		expectations.add(expect);
+		creator.markAsChanged(this);
 	}
 	
 	/**
@@ -70,21 +49,12 @@ public class Course {
 	public void removeExpectation(int index)
 	{
 		expectations.remove(index);
+		creator.markAsChanged(this);
 	}
-	
-	public void saveChanges()
-	{
-		String path = DatabaseAccess.location.getName() + "\\courses\\" + code + ".txt";
-		IO.createOutputFile(path);
-		for(int i = 0; i < expectations.size(); i++)
-		{
-			IO.println(expectations.get(i).getName() + "\n" + expectations.get(i).getDescription());
-		}
-		try {
-			IO.closeInputFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	@Override
+	public Element serialize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

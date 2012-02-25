@@ -1,6 +1,8 @@
 package mathMarks;
 
-public class Expectation {
+import org.jdom.Element;
+
+public class Expectation implements Recordable {
 	private Course course;
 	private String name;
 	private String description;
@@ -16,6 +18,7 @@ public class Expectation {
 		this.course = course;
 		this.name = name;
 		description = desc;
+		course.addExpectations(this);
 	}
 	
 	/**
@@ -45,17 +48,20 @@ public class Expectation {
 		return description;
 	}
 	
-	/**
-	 * 
-	 * @param desc
-	 */
-	public void setDescriptoin(String desc)
+	@Override
+	public boolean equals(Object e)
 	{
-		description = desc;
+		if (!(e instanceof Expectation)) {
+			return false;
+		} else {
+			return ((Expectation)e).getCourse().equals(getCourse())
+					&& ((Expectation)e).getName().equals(getName());
+		}
 	}
-	
-	public boolean equals(Expectation e)
-	{
-		return e.getCourse().equals(getCourse()) && e.getName().equals(getName());
+
+	@Override
+	public Element serialize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

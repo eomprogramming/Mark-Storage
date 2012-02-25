@@ -1,14 +1,16 @@
 package mathMarks;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Student {
+import org.jdom.Element;
+
+public class Student implements Recordable {
+	private DatabaseAccess creator;
 	private String id;
 	private String name;
 	private int grade;
-	//private LinkedList<Mark> marks;
+	private HashMap<String,LinkedList<Mark>> marks;
 	
 	/**
 	 * 
@@ -16,8 +18,9 @@ public class Student {
 	 * @param name
 	 * @param grade
 	 */
-	public Student(String id, String name, int grade)
+	public Student(DatabaseAccess creator, String id, String name, int grade)
 	{
+		this.creator = creator;
 		this.id = id;
 		this.name = name;
 		this.grade = grade;
@@ -32,6 +35,7 @@ public class Student {
 	{
 		this.name = name;
 		this.grade = grade;
+		creator.markAsChanged(this);
 	}
 	
 	/**
@@ -39,7 +43,9 @@ public class Student {
 	 */
 	public void promoteGrade()
 	{
-		//not sure how this works
+		grade++;
+		//TODO: Check for over-promotion?
+		creator.markAsChanged(this);
 	}
 	
 	/**
@@ -51,7 +57,7 @@ public class Student {
 		return name;
 	}
 	
-	/**
+	/**id
 	 * 
 	 * @return
 	 */
@@ -69,83 +75,69 @@ public class Student {
 		return grade;
 	}
 	
-	public LinkedList<Mark> getMarks(Classroom c, Expectation e)
+	public Mark[] getMarks(Course c)
 	{
-		LinkedList<Mark> marks = new LinkedList<Mark>();
-		IO.openInputFile(c.getPath()+"\\"+e.getName()+"\\"+id+".mark");
-		while(true){
-			try {
-				String mark = IO.readLine();			
-				String comment = IO.readLine();
-				if(mark==null||comment==null){
-					IO.closeInputFile();
-					break;
-				}
-				marks.offer(new Mark(e,mark,comment));
-			} catch (Exception exp) {
-				exp.printStackTrace();
-				break;
-			}
+		try {
+			return (Mark[]) marks.get(c.getCode()).toArray();
+		} catch (NullPointerException e) {
+			//TODO: Exception handling
+			return null;
 		}
-		return marks;
 	}
 	
-	/**
-	 * 
-	 * @return all marks for a given student
-	 */
-	public LinkedList<Mark> getAllMarks(Classroom c)
+	public Mark[] getMarks(Course c, Expectation e)
 	{
-		LinkedList<Expectation> expectations = c.getCourse().getExpectations();
-		LinkedList<Mark> marks = new LinkedList<Mark>();		
+		LinkedList<Mark> results = new LinkedList<Mark>();		
 		
-		for(Expectation e : expectations){
-			System.out.println(e.getName());
-			IO.openInputFile(c.getPath()+"\\"+e.getName()+"\\"+id+".mark");
-			while(true){
-				try {
-					String mark = IO.readLine();			
-					String comment = IO.readLine();
-					if(mark==null||comment==null){
-						IO.closeInputFile();
-						break;						
-					}
-					marks.offer(new Mark(e,mark,comment));
-				} catch (Exception exp) {
-					break;					
-				}
+		for (Mark m: marks.get(c.getCode())) {
+			if (m.getExpectation() == e) {
+				results.add(m);
 			}
 		}
-		return marks;
+		
+		return (Mark[]) results.toArray();
+	}
+	
+	public Mark[] getAllMarks() {
+		LinkedList<Mark> result = new LinkedList<Mark>();
+		
+		for (LinkedList<Mark> m: marks.values()) {
+			result.addAll(m);
+		}
+		
+		return (Mark[]) result.toArray();
 	}
 	
 	/**
 	 * adds mark to the correct expectation file
 	 * @param mark
 	 */
-	public void addMark(Classroom c, Mark mark)
+	protected void addMark(Course c, Mark mark)
 	{
-		if (new File(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark").exists())
-			IO.createOutputFile(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark",true);
-		else
-			IO.createOutputFile(c.getPath()+"\\"+mark.getExpectation().getName()+"\\"+id+".mark");
-		
-		IO.println(mark.getLevel());
-		IO.println(mark.getComment());
-		IO.closeOutputFile();
-		
+		LinkedList<Mark> list = marks.get(c.getCode());
+		if (list == null) {
+			list = new LinkedList<Mark>();
+			list.add(mark);
+			marks.put(c.getCode(), list);
+		} else {
+			list.add(mark);
+		}
+		creator.markAsChanged(this);
 	}
 	
 	/**
 	 * removes the last mark for a certain expectation
 	 * @param index
 	 */
-	public void removeMark(Classroom c, Expectation expectation)
+	public void removeMark(Course c, Mark m)
 	{
-		LinkedList <Mark> marks = getMarks(c,expectation);
-		marks.removeLast();
-		new File(c.getPath()+"\\"+expectation.getName()+"\\"+id+".mark").delete();
-		for(Mark m : marks)
-			addMark(c,m);
+		marks.get(c).remove(m);
+		creator.markAsChanged(this);
+	}
+
+	@Override
+	public Element serialize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

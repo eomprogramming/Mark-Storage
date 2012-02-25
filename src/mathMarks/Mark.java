@@ -1,9 +1,14 @@
 package mathMarks;
 
-public class Mark {
+import java.util.Calendar;
+
+import org.jdom.Element;
+
+public class Mark implements Recordable {
 	private Expectation expect;
 	private String comment;
 	private String level;
+	private Calendar date;
 	
 	/**
 	 * 
@@ -11,11 +16,14 @@ public class Mark {
 	 * @param level
 	 * @param comment
 	 */
-	public Mark(Expectation expect, String level, String comment)
+	public Mark(Student student, Expectation expect, String level, String comment,
+			Calendar date)
 	{
 		this.expect = expect;
 		this.level = level;
 		this.comment = comment;
+		this.date = date;
+		student.addMark(expect.getCourse(), this);
 	}
 	
 	/**
@@ -84,30 +92,13 @@ public class Mark {
 		return comment;
 	}
 	
-	/**
-	 * 
-	 * @param comment
-	 */
-	public void setComment(String comment)
-	{
-		this.comment = comment;
+	public Calendar getDate() {
+		return date;
 	}
-	
-	/**
-	 * 
-	 * @param comment
-	 */
-	public void addComment(String comment)
-	{
-		this.comment += "\n" + comment;
-	}
-	
-	/**
-	 * 
-	 * @param level
-	 */
-	public void setLevel(String level)
-	{
-		this.level = level;
+
+	@Override
+	public Element serialize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
