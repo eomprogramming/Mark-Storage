@@ -4,6 +4,14 @@ import java.util.Calendar;
 
 import org.jdom.Element;
 
+/**
+ * Represents a Mark that was given to a Student in an Expectation.
+ * Marks are immutable; instead of changing them, delete them with
+ * {@link Student#removeMark(Course, Mark)} and create a new one.
+ * @author Hao Wei
+ * @author Aly Hassan
+ * @author Ian Dewan
+ */
 public class Mark implements Recordable {
 	private Expectation expect;
 	private String comment;
@@ -11,10 +19,12 @@ public class Mark implements Recordable {
 	private Calendar date;
 	
 	/**
-	 * 
-	 * @param expect
-	 * @param level
-	 * @param comment
+	 * Creates a new Mark with the given properties.
+	 * @param student The Student who was given this Mark.
+	 * @param expect The expectation that this Mark is for.
+	 * @param level The actual level the Mark represents (<i>e.g.</i> 3+).
+	 * @param comment A comment on the Mark.
+	 * @param date The date the marks was given.
 	 */
 	public Mark(Student student, Expectation expect, String level, String comment,
 			Calendar date)
@@ -27,10 +37,12 @@ public class Mark implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
+	 * Compare two mark levels (<i>e.g.</i> 4+ and 2-).
+	 * @param a The first level.
+	 * @param b The Second level.
+	 * @return 1 if a &gt; b,<br/>
+	 * 0 if a = b,<br/>
+	 * -1 if a &lt; b
 	 */
 	public static int compareLevels(String a, String b)
 	{
@@ -66,8 +78,8 @@ public class Mark implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get the Expectation this Mark is for.
+	 * @return The Expectation.
 	 */
 	public Expectation getExpectation()
 	{
@@ -75,8 +87,8 @@ public class Mark implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get the level achieved.
+	 * @return The level.
 	 */
 	public String getLevel()
 	{
@@ -84,14 +96,18 @@ public class Mark implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get the comment given.
+	 * @return The comment.
 	 */
 	public String getComment()
 	{
 		return comment;
 	}
 	
+	/**
+	 * Get the date the Mark was given.
+	 * @return The date.
+	 */
 	public Calendar getDate() {
 		return date;
 	}

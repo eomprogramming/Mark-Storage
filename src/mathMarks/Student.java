@@ -5,6 +5,12 @@ import java.util.LinkedList;
 
 import org.jdom.Element;
 
+/**
+ * Represents a Student recorded in the database.
+ * @author Hao Wei
+ * @author Aly Hassan
+ * @author Ian Dewan
+ */
 public class Student implements Recordable {
 	private DatabaseAccess creator;
 	private String id;
@@ -13,10 +19,13 @@ public class Student implements Recordable {
 	private HashMap<String,LinkedList<Mark>> marks;
 	
 	/**
-	 * 
-	 * @param id
-	 * @param name
-	 * @param grade
+	 * Create a new Student. This method should only be called by DatabaseAccess
+	 * subclasses.
+	 * @param creator The DatabasAccess which manages this Student.
+	 * @param id The Student's id.
+	 * @param name The Student's name.
+	 * @param grade The Student's grade (an int from 1-4).
+	 * @see DatabaseAccess#newStudent(String, String, int)
 	 */
 	public Student(DatabaseAccess creator, String id, String name, int grade)
 	{
@@ -27,9 +36,9 @@ public class Student implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @param name
-	 * @param grade
+	 * Change some of the Student's information.
+	 * @param name The new Student name.
+	 * @param grade The new Student grade.
 	 */
 	public void change(String name, int grade)
 	{
@@ -39,7 +48,7 @@ public class Student implements Recordable {
 	}
 	
 	/**
-	 * 
+	 * Promote the Student to the next grade (<i>i.e.</i> increment the grade).
 	 */
 	public void promoteGrade()
 	{
@@ -49,17 +58,17 @@ public class Student implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get the Student's name.
+	 * @return The name.
 	 */
 	public String getName()
 	{
 		return name;
 	}
 	
-	/**id
-	 * 
-	 * @return
+	/**
+	 * Get the Student's student id.
+	 * @return The id.
 	 */
 	public String getId()
 	{
@@ -67,14 +76,19 @@ public class Student implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get the Students grade.
+	 * @return An int from 1-4 representing the grade.
 	 */
 	public int getGrade()
 	{
 		return grade;
 	}
 	
+	/**
+	 * Get an array of all the Marks the Student recieved in the given Course
+	 * @param c The Course in question.
+	 * @return An array of Marks, or null if no Marks have been given.
+	 */
 	public Mark[] getMarks(Course c)
 	{
 		try {
@@ -85,6 +99,13 @@ public class Student implements Recordable {
 		}
 	}
 	
+	/**
+	 * Get an array of the Marks given to the Student in the given Course for the given
+	 * Expectation.
+	 * @param c The Course.
+	 * @param e The Expectation.
+	 * @return All of the marks for that Course and Expectation.
+	 */
 	public Mark[] getMarks(Course c, Expectation e)
 	{
 		LinkedList<Mark> results = new LinkedList<Mark>();		
@@ -98,6 +119,10 @@ public class Student implements Recordable {
 		return (Mark[]) results.toArray();
 	}
 	
+	/**
+	 * Get an array of all Marks ever given to a Student.
+	 * @return All Marks.
+	 */
 	public Mark[] getAllMarks() {
 		LinkedList<Mark> result = new LinkedList<Mark>();
 		
@@ -109,8 +134,9 @@ public class Student implements Recordable {
 	}
 	
 	/**
-	 * adds mark to the correct expectation file
-	 * @param mark
+	 * Give the Student a new Mark.
+	 * @param mark The Mark to give.
+	 * @param c The Course it was given in.
 	 */
 	protected void addMark(Course c, Mark mark)
 	{
@@ -126,8 +152,9 @@ public class Student implements Recordable {
 	}
 	
 	/**
-	 * removes the last mark for a certain expectation
-	 * @param index
+	 * Remove the given Mark
+	 * @param m The Mark to remove.
+	 * @param c The Course the Mark was given in.
 	 */
 	public void removeMark(Course c, Mark m)
 	{

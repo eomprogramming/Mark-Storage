@@ -4,7 +4,17 @@ import java.util.LinkedList;
 
 import org.jdom.Element;
 
-public class Classroom implements Recordable{
+/**
+ * Represents one class in the marks database. A class can be uniquely represented by
+ * its course code and section, as well as the semester of its existence.
+ * @author Hao Wei
+ * @author Aly Hassan
+ * @author Ian Dewan
+ * @see DatabaseAccess#newClassroom(int, boolean, String, String)
+ * @see DatabaseAccess#getClassroom(int, boolean, String, String)
+ * @see DatabaseAccess#removeClassroom(int, boolean, String, String)
+ */
+public class Classroom implements Recordable {
 	private DatabaseAccess creator;
 	private Course course;
 	private LinkedList<Student> student;
@@ -13,10 +23,15 @@ public class Classroom implements Recordable{
 	private String section;
 	
 	/**
-	 * 
-	 * @param course
-	 * @param semester
-	 * @param section
+	 * Create a new Classroom. This constructor should only be called by DatabaseAccess
+	 * subclasses.
+	 * @param creator The DatabaseAccess that created this Classroom.
+	 * @param course The course taught in this class.
+	 * @param year The year in which the school year of this Classroom's existence
+	 * started.
+	 * @param semester True if this is semester one, false otherwise.
+	 * @param section The section number.
+	 * @see DatabaseAccess#newClassroom(int, boolean, String, String)
 	 */
 	protected Classroom(DatabaseAccess creator, Course course, int year,
 			boolean semester, String section)
@@ -28,30 +43,47 @@ public class Classroom implements Recordable{
 		this.year = year;		
 	}
 	
+	/**
+	 * Get the class name: the course code, a hyphen and then section number<br/>
+	 * <i>e.g.</i> <code>CLN4U-01</code><br/>
+	 * Usually used to identify the course in the database.
+	 * @return The class name.
+	 */
 	public String getName() {
 		return (course.getCode() + "-" + section);
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get an array containing all the students in this class.
+	 * @return An array of all Students.
 	 */
-	public Student[] getStudent()
+	public Student[] getStudents()
 	{
 		return (Student[]) student.toArray();
 	}
 	
+	/**
+	 * Get the year the school year that this class took place in began in.<br/>
+	 * <i>N.B.</i> A class starting in February 2013 will have a year of 2012, because
+	 * it is second semester.
+	 * @return The year.
+	 */
 	public int getYear() {
 		return year;
 	}
 	
+	/**
+	 * Return whether or not this class takes/took place in semester one.
+	 * @return True if semester one.
+	 */
 	public boolean getSemester() {
 		return semesterOne;
 	}
 	
 	/**
-	 * 
-	 * @param student
+	 * Add a new Student to the class.
+	 * @param student The Student to add.
+	 * @see DatabaseAccess#getStudent(String)
 	 */
 	public void addStudent(Student student)
 	{
@@ -60,8 +92,10 @@ public class Classroom implements Recordable{
 	}
 	
 	/**
-	 * 
-	 * @param index
+	 * Remove a Student from the class based on their index in the array returned by
+	 * getStudents().
+	 * @param index The index.
+	 * @see Classroom#getStudents()
 	 */
 	public void removeStudent(int index)
 	{
@@ -69,6 +103,10 @@ public class Classroom implements Recordable{
 		creator.markAsChanged(this);
 	}
 	
+	/**
+	 * Get the Course taught in this class.
+	 * @return The Course.
+	 */
 	public Course getCourse(){
 		return course;
 	}

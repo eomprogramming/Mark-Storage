@@ -2,16 +2,24 @@ package mathMarks;
 
 import org.jdom.Element;
 
+/**
+ * This class represents a course expectation for which a Student may recieve marks.
+ * Expectations are immutable; rather than changing them, delete them with
+ * {@link Course#removeExpectation()} and create a new one.
+ * @author Hao Wei
+ * @author Aly Hassan
+ * @author Ian Dewan
+ */
 public class Expectation implements Recordable {
 	private Course course;
 	private String name;
 	private String description;
 	
 	/**
-	 * 
-	 * @param course
-	 * @param name
-	 * @param desc
+	 * Create a new Expectation with the given properties.
+	 * @param course The Course this Expectation id for.
+	 * @param name The (short) Expectation name.
+	 * @param desc A longer description of the Expectation.
 	 */
 	public Expectation(Course course, String name, String desc)
 	{
@@ -22,8 +30,8 @@ public class Expectation implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get the Course this Expectation is for.
+	 * @return The Course.
 	 */
 	public Course getCourse()
 	{
@@ -31,8 +39,8 @@ public class Expectation implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get this Expectation's name.
+	 * @return The name.
 	 */
 	public String getName()
 	{
@@ -40,8 +48,8 @@ public class Expectation implements Recordable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get this Expectation's description.
+	 * @return The description.
 	 */
 	public String getDescription()
 	{
