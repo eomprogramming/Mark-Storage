@@ -1,5 +1,7 @@
 package mathMarks;
 
+import java.util.LinkedList;
+
 public abstract class DatabaseAccess {
 	public abstract Student getStudent(String id);
 	public abstract Student newStudent(String id, String name, int grade);
@@ -13,7 +15,8 @@ public abstract class DatabaseAccess {
 			String courseCode, String section);
 	public abstract void removeClassroom(int year, boolean semesterOne,
 			String courseCode, String section);
-	public abstract void markAsChanged(Recordable id);
+	protected abstract void markAsChanged(Recordable id);
 	public abstract void flushPartial();
 	public abstract void flush();
+	protected abstract LinkedList<Mark> loadMarks(Student student, Course course);
 }
