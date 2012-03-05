@@ -1,4 +1,4 @@
- package mathMarks;
+ package com.earlofmarch.mathMarks.model;
 
 import java.util.LinkedList;
 

@@ -1,9 +1,10 @@
-package mathMarks;
+package com.earlofmarch.mathMarks.model;
 
-import gui.MainFrame;
 
 import java.io.File;
 import java.util.Calendar;
+
+import com.earlofmarch.mathMarks.gui.MainFrame;
 
 /**
  * What do you think it does? 
