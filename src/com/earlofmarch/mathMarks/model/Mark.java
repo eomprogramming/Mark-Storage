@@ -15,7 +15,8 @@ import org.jdom.Element;
 public class Mark implements Recordable {
 	private Expectation expect;
 	private String comment;
-	private String level;
+	private MarkLevel level;
+	private MarkType type;
 	private Calendar date;
 	
 	/**
@@ -25,56 +26,17 @@ public class Mark implements Recordable {
 	 * @param level The actual level the Mark represents (<i>e.g.</i> 3+).
 	 * @param comment A comment on the Mark.
 	 * @param date The date the marks was given.
+	 * @param t The type of the mark.
 	 */
-	public Mark(Student student, Expectation expect, String level, String comment,
-			Calendar date)
+	public Mark(Student student, Expectation expect, MarkLevel level, String comment,
+			Calendar date, MarkType t)
 	{
 		this.expect = expect;
 		this.level = level;
 		this.comment = comment;
 		this.date = date;
+		this.type = t;
 		student.addMark(expect.getCourse(), this);
-	}
-	
-	/**
-	 * Compare two mark levels (<i>e.g.</i> 4+ and 2-).
-	 * @param a The first level.
-	 * @param b The Second level.
-	 * @return 1 if a &gt; b,<br/>
-	 * 0 if a = b,<br/>
-	 * -1 if a &lt; b
-	 */
-	public static int compareLevels(String a, String b)
-	{
-		a = a.trim();
-		b = b.trim();
-		
-		if(a.substring(0, 1).compareTo(b.substring(0, 1)) > 0)
-			return 1;
-		if(a.substring(0, 1).compareTo(b.substring(0, 1)) < 0)
-			return -1;
-		if(a.length() == 2 && b.length() == 2)
-		{
-			if(a.substring(1, 2).compareTo(b.substring(1, 2)) < 0)
-				return 1;
-			if(a.substring(1, 2).compareTo(b.substring(1, 2)) > 0)
-				return -1;
-		}
-		if(a.length() == 1 && b.length() == 2)
-		{
-			if(b.substring(1, 2).equals("+"))
-				return -1;
-			if(b.substring(1, 2).equals("-"))
-				return 1;
-		}
-		if(a.length() == 2 && b.length() == 1)
-		{
-			if(a.substring(1, 2).equals("+"))
-				return 1;
-			if(a.substring(1, 2).equals("-"))
-				return -1;
-		}
-		return 0;
 	}
 	
 	/**
@@ -90,7 +52,7 @@ public class Mark implements Recordable {
 	 * Get the level achieved.
 	 * @return The level.
 	 */
-	public String getLevel()
+	public MarkLevel getLevel()
 	{
 		return level;
 	}
@@ -110,6 +72,14 @@ public class Mark implements Recordable {
 	 */
 	public Calendar getDate() {
 		return date;
+	}
+	
+	/**
+	 * Get the {@link MarkType} associated with this Mark.
+	 * @return The type.
+	 */
+	public MarkType getType() {
+		return type;
 	}
 
 	@Override
