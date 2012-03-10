@@ -2,6 +2,7 @@ package com.earlofmarch.mathMarks.model;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.*;
 
 import org.jdom.Element;
 
@@ -49,11 +50,18 @@ public class Student implements Recordable {
 	
 	/**
 	 * Promote the Student to the next grade (<i>i.e.</i> increment the grade).
+	 * Will ignore attempts to promote the Student beyond grade 12.
 	 */
 	public void promoteGrade()
 	{
 		grade++;
-		//TODO: Check for over-promotion?
+		if (grade > 4) {
+			grade = 4;
+			Logger.getLogger("com.earlofmarch.mathMarks").logp(Level.WARNING,
+					"Student", "promoteGrade", "Attempt to over-promote student",
+					this);
+			return;
+		}
 		creator.markAsChanged(this);
 	}
 	
@@ -91,12 +99,11 @@ public class Student implements Recordable {
 	 */
 	public Mark[] getMarks(Course c)
 	{
-		try {
-			return (Mark[]) marks.get(c.getCode()).toArray();
-		} catch (NullPointerException e) {
-			//TODO: Exception handling
-			return null;
+		LinkedList<Mark> ret = marks.get(c.getCode());
+		if (ret == null) {
+			ret = creator.loadMarks(this, c);
 		}
+		return ret.toArray(new Mark[] {});
 	}
 	
 	/**
@@ -110,7 +117,7 @@ public class Student implements Recordable {
 	{
 		LinkedList<Mark> results = new LinkedList<Mark>();		
 		
-		for (Mark m: marks.get(c.getCode())) {
+		for (Mark m: getMarks(c)) {
 			if (m.getExpectation() == e) {
 				results.add(m);
 			}
@@ -120,7 +127,10 @@ public class Student implements Recordable {
 	}
 	
 	/**
-	 * Get an array of all Marks ever given to a Student.
+	 * Get an array of all Marks ever given to a Student. <br/>
+	 * <b>WARNING:</b> If the Student's marks for a Course have not been loaded into
+	 * memory by a call to {@link Student#getMarks(Course)}, they will not be
+	 * included in this array. Use this method with caution.
 	 * @return All Marks.
 	 */
 	public Mark[] getAllMarks() {
@@ -140,7 +150,8 @@ public class Student implements Recordable {
 	 */
 	protected void addMark(Course c, Mark mark)
 	{
-		LinkedList<Mark> list = marks.get(c.getCode());
+		LinkedList<Mark> tmp = marks.get(c.getCode());
+		LinkedList<Mark> list = (tmp != null) ? tmp : creator.loadMarks(this, c);
 		if (list == null) {
 			list = new LinkedList<Mark>();
 			list.add(mark);
@@ -158,7 +169,9 @@ public class Student implements Recordable {
 	 */
 	public void removeMark(Course c, Mark m)
 	{
-		marks.get(c).remove(m);
+		LinkedList<Mark> tmp = marks.get(c.getCode());
+		LinkedList<Mark> list = (tmp != null) ? tmp : creator.loadMarks(this, c);
+		list.remove(m);
 		creator.markAsChanged(this);
 	}
 

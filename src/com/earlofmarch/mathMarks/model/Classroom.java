@@ -1,6 +1,7 @@
  package com.earlofmarch.mathMarks.model;
 
 import java.util.LinkedList;
+import java.util.logging.*;
 
 import org.jdom.Element;
 
@@ -44,7 +45,7 @@ public class Classroom implements Recordable {
 	}
 	
 	/**
-	 * Get the class name: the course code, a hyphen and then section number<br/>
+	 * Get the class name: the course code, a hyphen and then section number
 	 * <i>e.g.</i> <code>CLN4U-01</code><br/>
 	 * Usually used to identify the course in the database.
 	 * @return The class name.
@@ -94,12 +95,19 @@ public class Classroom implements Recordable {
 	/**
 	 * Remove a Student from the class based on their index in the array returned by
 	 * getStudents().
+	 * Does nothing if the index is invalid.
 	 * @param index The index.
 	 * @see Classroom#getStudents()
 	 */
 	public void removeStudent(int index)
 	{
-		student.remove(index);
+		try {
+			student.remove(index);
+		} catch (IndexOutOfBoundsException e) {
+			Logger.getLogger("com.earlofmarch.mathMarks").logp(Level.WARNING,
+					"Classroom", "removeStudent",
+					"Attempt to remove non-existent student.", e);
+		}
 		creator.markAsChanged(this);
 	}
 	
