@@ -5,19 +5,19 @@ package com.earlofmarch.mathMarks.model;
  * @author Ian Dewan
  */
 public enum MarkType {
-	//TODO: Rename these to their actual names; give better comments.
 	/**
 	 * Marks based on _actual work_.
 	 */
-	ACTUAL_MARKS,
+	REAL_MARKS,
 	
 	/**
-	 * Marks based on how you "interact with the teacher."
+	 * Marks based on how you "interact with the teacher," and "expand your learning"
+	 * by "asking questions."
 	 */
-	INTERACTIVITY_BULL,
+	CONVERSATIONAL,
 	
 	/**
-	 * Marks based on the other thing.
+	 * Marks based observing the student working.
 	 */
-	THE_OTHER_ONE
+	OBSERVATIONAL
 }
